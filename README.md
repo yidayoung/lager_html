@@ -35,12 +35,13 @@
 ]
 ```
 
-可以选择在启动参数里加入 -config xx.config xx.config中的内容 {lager, KV}.
-或者在rebar.config中加入get-deps的hook，在每次拉取下来的时候重新修改lager的 lager.app.src中的默认环境变量
-不推荐在代码中调用application:set_env来实现，因为lager.app.src中会覆盖之前的内容，而且lager很多参数都是启动时生效，后续不能修改
+可以选择在启动参数里加入 -config xx.config xx.config中的内容 {lager, KV}.  
+或者在rebar.config中加入get-deps的hook，在每次拉取下来的时候重新修改lager的 lager.app.src中的默认环境变量  
+不推荐在代码中调用application:set_env来实现，因为lager.app.src中会覆盖之前的内容，而且lager很多参数都是启动时生效，后续不能修改  
 
 
 ## 测试
-在rebar.config 的erl_option 中加入`{src_dirs, ["src", "test"]}`  
-编译后，在命令行执行 `lager_html_test:test().`  
+在rebar.config 的erl_opts 中加入`{src_dirs, ["src", "test"]}`编译    
+在项目目录下执行`erl -pa ebin deps/lager/ebin deps/goldrush/ebin -config test/lager_html_test.config`  
+执行 `lager_html_test:test().`  
 log目录下就会生成对应的日志文件
