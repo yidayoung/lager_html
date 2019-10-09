@@ -1,0 +1,14 @@
+{application, lager_html,
+ [
+  {description, "An Erlang Log library"},
+  {vsn, "0.0.1"},
+  {modules, [
+            ]},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  lager
+                 ]},
+  {env, []}
+ ]}.
