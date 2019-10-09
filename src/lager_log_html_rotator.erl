@@ -6,7 +6,7 @@
 %%% @end
 %%% Created : 20. 九月 2019 17:50
 %%%-------------------------------------------------------------------
--module(log_rotator).
+-module(lager_log_html_rotator).
 -behavior(lager_rotator_behaviour).
 
 %% API

@@ -6,7 +6,7 @@
 %%% @end
 %%% Created : 20. 九月 2019 15:49
 %%%-------------------------------------------------------------------
--module(log_formatter).
+-module(lager_log_html_formatter).
 
 
 %% API

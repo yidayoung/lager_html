@@ -15,14 +15,14 @@
                 {file, "error_log"},
                 %%debug=128, info=64, notice=32, warning=16, error=8, critical=4, alert=2, emergency=1, none=0
                 {level, info},
-                {formatter, log_formatter},
+                {formatter, lager_log_html_formatter},
                 %% 字符串格式
                 {formatter_config, ["<div><font size=\"2\" color=", html_color, ">\n== ", date, " ",
                     time, " ===", sev, "(", pid, module, ":", line, ") ： ", message, "\n</font></div>"]},
                 %% 每天生成新日志文件，最多保留30个
                 {date, "$D0"},
                 {count, 30},
-                {rotator, log_rotator}
+                {rotator, lager_log_html_rotator}
             ]}
     ]},
     %% error_logger重定向
@@ -45,3 +45,8 @@
 在项目目录下执行`erl -pa ebin deps/lager/ebin deps/goldrush/ebin -config test/lager_html_test.config`  
 执行 `lager_html_test:test().`  
 log目录下就会生成对应的日志文件
+
+
+## 使用
+也可以仿照lager_log_html_formatter和lager_log_html_rotator写两个类似的模块放到自己的工程项目中，
+项目本身并没有其他扩展
