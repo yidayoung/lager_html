@@ -7,7 +7,7 @@
 你必须把下面的内容覆盖到lager的环境变量中
 ```erlang
 [
-    {log_root, "log/"},
+    {log_root, "./log"},
     {handlers, [
         {lager_file_backend,
             [
@@ -16,9 +16,9 @@
                 %%debug=128, info=64, notice=32, warning=16, error=8, critical=4, alert=2, emergency=1, none=0
                 {level, info},
                 {formatter, lager_log_html_formatter},
-                %% 字符串格式
-                {formatter_config, ["<div><font size=\"2\" color=", html_color, ">\n== ", date, " ",
-                    time, " ===", sev, "(", pid, module, ":", line, ") ： ", message, "\n</font></div>"]},
+                %% 字符串格式，可选值，使用lager_log_html_formatter后默认模板会改成以下内容
+%%                    {formatter_config, ["<div><font size=\"2\" color=", html_color, ">\n== ", date, " ",
+%%                        time, " ===", sev, "(", pid, module, ":", line, ") ： ", message, "\n</font></div>"]},
                 %% 每天生成新日志文件，最多保留30个
                 {date, "$D0"},
                 {count, 30},
@@ -32,6 +32,15 @@
     {crash_log, "crash.log"}, %% crash.log文件名
     {crash_log_count, 5},    %% 最多保存5个crash.log文件
     {crash_log_date, "$Ml"} %% 每月最后一天生成一个新的crash.log
+
+    %% html染色,替换lager_log_html_formatter提供的模板中的html_color字段，可选值，默认值如下
+    %% {html_colors, [
+    %%     {error, "\"#FF0000\""},
+    %%     {warning, "\"#FFCC33\""},
+    %%     {debug, "\"#00FFD2\""},
+    %%     {info, "\"#00FF00\""},
+    %%     {critical, "\"#6C2A6D\""}]}
+
 ]
 ```
 
