@@ -22,17 +22,22 @@
 
 -define(OTHER_COLOUR, "\"#50CCFF\"").
 
+-define(DEFAULT_FORMAT, ["<div><font size=\"2\" color=", html_color, ">\n== ", date, " ",
+    time, " ===", sev, "(", pid, module, ":", line, ") ： ", message, "\n</font></div>"]).
+
 format(Msg, Config) ->
     format(Msg, Config, []).
 
 format(Message, Config, Colors) ->
-    Config1 = [case V of
+    Config1 = ensure_config(Config),
+    HtmlColors = ensure_htmlColors(),
+    Config2 = [case V of
                    html_color ->
-                       output_color(Message, ?COLORS);
+                       output_color(Message, HtmlColors);
                    _ ->
                        V
-               end || V <- Config],
-    lager_default_formatter:format(Message, Config1, Colors).
+               end || V <- Config1],
+    lager_default_formatter:format(Message, Config2, Colors).
 
 output_color(_Msg, []) ->
     [];
@@ -45,3 +50,17 @@ output_color(Msg, Colors) ->
             ?OTHER_COLOUR
     end.
 
+
+
+ensure_config([_|_] = C) ->
+    C;
+ensure_config(_) ->
+    ?DEFAULT_FORMAT.
+
+ensure_htmlColors() ->
+    case application:get_env(lager, html_colors) of
+        {ok, [_|_] = Colors} ->
+            Colors;
+        _ ->
+            ?COLORS
+    end.
