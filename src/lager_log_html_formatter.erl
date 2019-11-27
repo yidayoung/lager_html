@@ -23,7 +23,7 @@
 -define(OTHER_COLOUR, "\"#50CCFF\"").
 
 -define(DEFAULT_FORMAT, ["<div><font size=\"2\" color=", html_color, ">\n== ", date, " ",
-    time, " ===", sev, "(", pid, module, ":", line, ") ： ", message, "\n</font></div>"]).
+    time, " ===", sev, "(", pid, module, ":", function, ":", line, ") ： ", message, "\n</font></div>"]).
 
 format(Msg, Config) ->
     format(Msg, Config, []).
@@ -52,14 +52,14 @@ output_color(Msg, Colors) ->
 
 
 
-ensure_config([_|_] = C) ->
+ensure_config([_ | _] = C) ->
     C;
 ensure_config(_) ->
     ?DEFAULT_FORMAT.
 
 ensure_htmlColors() ->
     case application:get_env(lager, html_colors) of
-        {ok, [_|_] = Colors} ->
+        {ok, [_ | _] = Colors} ->
             Colors;
         _ ->
             ?COLORS
