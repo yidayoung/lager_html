@@ -28,9 +28,14 @@ ensure_logfile(Name0, FD, Inode0, Ctime0, Buffer) ->
     check_head(Name),
     R.
 
-rotate_logfile(Name0, _Count) ->
+rotate_logfile(Name0, Count) ->
     Name = make_log_name(Name0),
-    check_head(Name).
+    case filelib:file_size(Name) of
+        0 ->
+            write_head(Name);
+        _ ->
+            lager_rotator_default:rotate_logfile(Name, Count)
+    end.
 
 
 log_time() ->
