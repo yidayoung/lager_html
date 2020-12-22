@@ -1,14 +1,16 @@
 {application, lager_html,
- [
-  {description, "An Erlang Log library"},
-  {vsn, "0.0.1"},
-  {modules, [
-            ]},
-  {registered, []},
-  {applications, [
-                  kernel,
-                  stdlib,
-                  lager
-                 ]},
-  {env, []}
- ]}.
+    [
+        {description, "An Erlang Log library"},
+        {vsn, "0.0.1"},
+        {modules, [
+        ]},
+        {registered, []},
+        {applications, [
+            kernel,
+            stdlib,
+            lager
+        ]},
+        {env, []},
+        {licenses, ["MIT"]},
+        {links, [{"GitHub", "https://github.com/yidayoung/lager_html"}]}
+    ]}.
