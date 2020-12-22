@@ -1,5 +1,6 @@
 # lager_html
-基于lager生成html文件，易于查看
+基于lager生成html文件，易于查看  
+![image](images/log.jpeg)  
 
 简单的来说就是加了自定义的formatter和rotator,其他内容保持和lager一致
 
